@@ -1,6 +1,6 @@
 import config from "./config.js";
 
-const apiKey = config.HADITH_API_KEY || process.env.HADITH_API_KEY;
+const apiKey = config.HADITH_API_KEY || env.HADITH_API_KEY;
 // const container = document.querySelector(".container");
 const kutubContainer = document.querySelector(".kutub-container");
 
