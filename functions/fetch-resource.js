@@ -13,7 +13,9 @@ exports.handler = async (event, context) => {
     );
 
     if (!response.ok) {
-      throw new Error("Network response was not ok, netlify");
+      throw new Error(
+        `Network response was not ok, netlify, ${apiKey}, ${requestedResource}, ${event.queryStringParameters}`
+      );
     }
 
     const data = await response.json();
