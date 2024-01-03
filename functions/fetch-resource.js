@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const apiKey = process.env.HADITH_API_KEY;
 
 exports.handler = async (event, context) => {
   try {
@@ -7,7 +8,6 @@ exports.handler = async (event, context) => {
       "slash",
       "/"
     );
-    const apiKey = process.env.HADITH_API_KEY;
 
     const response = await fetch(
       `https://hadithapi.com/api/sahih-bukhari/chapters?apiKey=${apiKey}`
