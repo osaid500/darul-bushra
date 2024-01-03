@@ -6,12 +6,16 @@ let books = [];
 const urlParams = new URLSearchParams(window.location.search);
 const kitabSlug = urlParams.get("kitabSlug") || "sahih-bukhari";
 
+const isLocal = window.location.hostname === "localhost" || "127.0.0.1/";
+
 async function fetchBooks() {
-  // return;
   try {
-    const response = await fetch(
-      `http://localhost:3000/fetch-api/${kitabSlug}slashchapters`
-    );
+    // Update the URL based on the environment
+    const apiUrl = isLocal
+      ? "http://localhost:3000/fetch-api/"
+      : "/.netlify/functions/fetch-api/";
+
+    const response = await fetch(`${apiUrl}${kitabSlug}slashchapters`);
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
