@@ -3,11 +3,11 @@ const apiKey = process.env.HADITH_API_KEY;
 
 exports.handler = async (event, context) => {
   try {
-    console.log(event, "here we go", process.env);
-    const requestedResource = event.queryStringParameters.resource.replace(
-      "slash",
-      "/"
-    );
+    // console.log(event, "here we go", process.env);
+    // const requestedResource = event.queryStringParameters.resource.replace(
+    //   "slash",
+    //   "/"
+    // );
 
     const response = await fetch(
       `https://hadithapi.com/api/sahih-bukhari/chapters?apiKey=${apiKey}`
