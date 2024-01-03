@@ -6,7 +6,7 @@ let books = [];
 const urlParams = new URLSearchParams(window.location.search);
 const kitabSlug = urlParams.get("kitabSlug") || "sahih-bukhari";
 
-const isLocal = window.location.hostname === "localhost" || "127.0.0.1/";
+const isLocal = window.location.hostname === "127.0.0.1/";
 
 async function fetchBooks() {
   try {
