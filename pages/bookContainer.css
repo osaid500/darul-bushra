@@ -1,0 +1,111 @@
+/* CSS VARIABLE */
+
+:root {
+  --passiveBackground: white;
+  --activeBackground: #ffe7c1;
+  --passiveBook: rgb(226, 226, 226);
+  --activeBook: #2d3250;
+  --passiveTitle: #3d3b40;
+  --activeTitle: #3d3b40;
+  --passiveNumber: #2d3250;
+  --activeNumber: white;
+
+  --transitionDuration: 0.2s;
+}
+
+.container {
+  max-width: 1000px; /* Set a maximum width to limit the width on larger screens */
+}
+
+h2 {
+  color: #2d3250;
+  transition: var(--transitionDuration);
+}
+
+.book-grid-container {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  /* grid-template-columns: auto auto auto; */
+  gap: 17px;
+}
+
+.book-grid-item {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: var(--passiveBackground);
+  border-radius: 2px;
+  /* width: 400px; */
+  /* height: 80px; */
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding: 0 12px;
+  gap: 17px;
+  cursor: pointer;
+
+  transition: var(--transitionDuration);
+}
+
+.book-grid-item:hover {
+  box-shadow: var(--activeBook) 0 0 0 3px;
+  background-color: var(--activeBackground);
+}
+
+.play-button {
+  width: 40px;
+  margin: 0;
+}
+
+.book-grid-item:hover {
+  transform: scale(1.04);
+}
+
+.number-container {
+  width: 30px;
+  height: 30px;
+  background-color: var(--passiveBook);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  transition: var(--transitionDuration);
+}
+
+.book-grid-item:hover .number-container {
+  background-color: var(--activeBook);
+}
+
+.book-number {
+  margin: 0;
+  font-size: 13px;
+  color: var(--passiveNumber);
+}
+
+.book-grid-item:hover .book-number {
+  color: var(--activeNumber);
+}
+
+.book-english-title {
+  font-size: 13px;
+  flex: 1;
+  color: var(--passiveTitle);
+  /* width: 150px; */
+}
+
+.book-arabic-title {
+  font-size: 13px;
+  direction: rtl;
+  font-family: arabicFont;
+  color: var(--passiveTitle);
+  margin-left: auto;
+}
+
+.title-container {
+  flex: 1;
+}
+
+.book-grid-item:hover .book-english-title,
+.book-grid-item:hover .book-arabic-title {
+  color: var(--activeTitle);
+}

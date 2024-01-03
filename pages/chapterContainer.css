@@ -1,0 +1,145 @@
+@font-face {
+  font-family: "urduFont";
+  src: url("../urdu.ttf");
+}
+
+.urdu-text {
+  font-family: urduFont;
+  line-height: 2.35;
+  font-size: 13px;
+  direction: rtl;
+  margin-top: 0;
+}
+
+.book-container {
+  border-radius: 10px;
+  width: 100%;
+  /* background-color: #fffefa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+.book-title {
+  font-weight: 500;
+}
+
+.book-arabic-title {
+  font-weight: 500;
+  direction: rtl;
+  font-family: arabicFont;
+  margin-top: 10px;
+}
+
+/* HOLDS CHAPTER AND HADITH TOGETHER */
+
+.whole-hadith-container {
+  width: 100%;
+}
+
+.chapter-description-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
+  color: rgb(118, 118, 118);
+}
+
+.chapter-description-container p {
+  width: 100%;
+}
+
+.chapter-arabic-description {
+  direction: rtl;
+  font-family: arabicFont;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.chapter-description {
+  /* color: gray; */
+}
+
+/* .hadith-container {
+  background-color: #fffefa;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  text-align: justify;
+} */
+
+.hadith-container {
+  background-color: #fffefa;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+}
+
+.hadith-text-container {
+  display: flex;
+  justify-content: space-between;
+  text-align: justify;
+}
+
+.hadith-narrator {
+  font-weight: 600;
+  color: #7fb6b9;
+  margin: 0;
+}
+
+/* arabic hadith container */
+.arabic-container {
+  line-height: 30px;
+  font-size: 20px;
+  width: 47%;
+}
+
+.arabic-hadith-text {
+  margin: 0;
+  padding: 0;
+  word-spacing: 3px;
+  font-family: arabicFont;
+  direction: rtl;
+}
+
+.english-container {
+  width: 47%;
+}
+
+.hadith-text {
+  line-height: 20px;
+  word-spacing: 2px;
+}
+
+/* hadith references */
+
+.reference-container {
+  display: flex;
+}
+
+.hadith-number {
+  margin-right: 20px;
+}
+
+.table-reference {
+  width: 40%;
+  font-size: 13px;
+}
+
+.table-reference td {
+}
+
+/* CONTAINER END!!! */

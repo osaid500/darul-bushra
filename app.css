@@ -1,0 +1,81 @@
+/* font */
+
+@font-face {
+  font-family: "arabicFont";
+  src: url("arabicfont.ttf");
+}
+
+body {
+  margin: 0;
+  background-color: #fbf9f1;
+}
+
+/* HEADER BEGINNING!!! */
+
+header {
+  background-color: #ffe7c1;
+  width: 100%;
+  height: 60px;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+a {
+  text-decoration: none;
+}
+
+.header-text a {
+  margin: 0;
+  color: #3d3b40;
+  font-weight: 400;
+  cursor: pointer;
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); */
+}
+
+nav {
+  height: 100%;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  /* align-items: center;
+  height: 100%; */
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #3d3b40;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  transition: 0.2s;
+}
+
+.nav-links a:hover {
+  background-color: #fbf9f1;
+}
+
+/* HEADER END!!! */
+
+/* *********************************************************************************************************** */
+
+/* CONTAINER BEGINNING!!! */
+
+/* the container that contains all ahadith */
+.container {
+  padding: 20px;
+  width: 80%; /* Set the width to 80% of the viewport width */
+  max-width: 800px; /* Set a maximum width to limit the width on larger screens */
+  margin: auto;
+  font-family: Roboto;
+  color: #3d3b40;
+}
