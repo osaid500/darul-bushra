@@ -13,7 +13,7 @@ exports.handler = async (event, context) => {
     );
 
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      throw new Error("Network response was not ok, netlify");
     }
 
     const data = await response.json();
@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "internal server error" }),
+      body: JSON.stringify({ error: "internal server error, netlify" }),
     };
   }
 };

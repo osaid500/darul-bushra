@@ -12,8 +12,8 @@ async function fetchBooks() {
   try {
     // Update the URL based on the environment
     const apiUrl = isLocal
-      ? "http://localhost:3000/fetch-api/"
-      : "/.netlify/functions/fetch-api/";
+      ? "http://localhost:3000/fetch-resource/"
+      : "/.netlify/functions/fetch-resource/";
 
     const response = await fetch(`${apiUrl}${kitabSlug}slashchapters`);
 

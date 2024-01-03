@@ -3,7 +3,7 @@ const kutubContainer = document.querySelector(".kutub-container");
 
 async function fetchKutub() {
   try {
-    const response = await fetch("http://localhost:3000/fetch-api/books");
+    const response = await fetch("http://localhost:3000/fetch-resource/books");
 
     if (!response.ok) {
       throw new Error("Network response was not ok");

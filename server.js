@@ -18,7 +18,7 @@ app.get("/", function (req, res) {
 });
 
 // This route is responsible for providing the API key to the client
-app.get("/fetch-api/:resource", (req, res) => {
+app.get("/fetch-resource/:resource", (req, res) => {
   const requestedResource = req.params.resource.replace("slash", "/");
 
   async function fetchKutub() {
