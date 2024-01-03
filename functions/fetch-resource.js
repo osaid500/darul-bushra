@@ -31,7 +31,9 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        error: `internal server error, netlify, ${event}, "AND HERE WE GO", ${event.queryStringParameters}`,
+        error: `internal server error, netlify, ${JSON.stringify(
+          event
+        )}, "AND HERE WE GO", ${JSON.stringify(event).queryStringParameters}`,
       }),
     };
   }
