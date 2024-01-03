@@ -2,6 +2,7 @@ const fetch = require("node-fetch");
 
 exports.handler = async (event, context) => {
   try {
+    console.log(event, event.queryStringParameters, process.env);
     const requestedResource = event.queryStringParameters.resource.replace(
       "slash",
       "/"
