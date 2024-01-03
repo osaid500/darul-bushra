@@ -1,6 +1,6 @@
 import config from "./config.js";
 
-const apiKey = config.HADITH_API_KEY;
+const apiKey = config.HADITH_API_KEY || process.env.HADITH_API_KEY;
 // const container = document.querySelector(".container");
 const kutubContainer = document.querySelector(".kutub-container");
 
@@ -10,9 +10,9 @@ async function fetchKutub() {
       `https://hadithapi.com/api/books?apiKey=${apiKey}`
     );
 
-    // if (!response.ok) {
-    //   throw new Error("Network response was not ok");
-    // }
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
 
     const data = await response.json();
     const kutub = data.books;
