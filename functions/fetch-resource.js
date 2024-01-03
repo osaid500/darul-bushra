@@ -3,7 +3,7 @@ const apiKey = process.env.HADITH_API_KEY;
 
 exports.handler = async (event, context) => {
   try {
-    console.log(event.queryStringParameters, "here we go", process.env);
+    console.log(event, "here we go", process.env);
     const requestedResource = event.queryStringParameters.resource.replace(
       "slash",
       "/"
@@ -13,9 +13,13 @@ exports.handler = async (event, context) => {
       `https://hadithapi.com/api/sahih-bukhari/chapters?apiKey=${apiKey}`
     );
 
+    console.log("past fetching");
+
     if (!response.ok) {
       throw new Error(`Network response was not ok, NETLIFY LO`);
     }
+
+    console.log("past checking if response is ok");
 
     const data = await response.json();
 
