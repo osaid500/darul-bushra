@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "lambda-build": "netlify-lambda build functions && node -p 'process.env'"
+  }
+}
