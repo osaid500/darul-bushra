@@ -9,13 +9,11 @@ exports.handler = async (event, context) => {
     const apiKey = process.env.HADITH_API_KEY;
 
     const response = await fetch(
-      `https://hadithapi.com/api/${requestedResource}?apiKey=${apiKey}`
+      `https://hadithapi.com/api/sahih-bukhari/chapters?apiKey=${apiKey}`
     );
 
     if (!response.ok) {
-      throw new Error(
-        `Network response was not ok, netlify, ${apiKey}, ${requestedResource}, ${event.queryStringParameters}`
-      );
+      throw new Error(`Network response was not ok, NETLIFY LO`);
     }
 
     const data = await response.json();
