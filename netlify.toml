@@ -1,6 +1,8 @@
 [build]
-command = "npm run build"  # Adjust this if needed
-functions = "functions"    # Folder containing your serverless functions
+    command = "npm run build"  # Adjust this if needed
+    functions = "functions"    # Folder containing your serverless functions
+    publish = ""
 
 [dev]
-functions = "functions"    # Folder containing your serverless functions
+    functions = "functions"    # Folder containing your serverless functions
+    publish = ""
