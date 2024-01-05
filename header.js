@@ -1,12 +1,11 @@
 function header() {
   const header = document.createElement("header");
   header.innerHTML = `<header>
-      <h1 class="header-text"><a href="/">Darul-Bushra</a></h1>
+      <h1 class="header-text"><a href="/#">Darul-Bushra</a></h1>
       <nav>
         <ul class="nav-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="/">Books</a></li>
-          <li><a href="/">About</a></li>
+          <li><a href="/#">Home</a></li>
+          <li><a href="/pages/about.html">About</a></li>
         </ul>
       </nav>
     </header>`;

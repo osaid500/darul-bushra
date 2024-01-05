@@ -1,0 +1,57 @@
+main {
+  overflow: hidden;
+
+  /* padding: 20px; */
+
+  min-height: 594px;
+  height: calc(100vh - 80px);
+  position: relative;
+}
+
+h2,
+p {
+  /* color: white; */
+  font-family: Roboto;
+  z-index: 1;
+}
+
+.title-container {
+  background-color: #92c7cf;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px -23px 25px 0px rgba(0, 0, 0, 0.17) inset,
+    0px -36px 30px 0px rgba(0, 0, 0, 0.15) inset,
+    0px -79px 40px 0px rgba(0, 0, 0, 0.1) inset, 0px 2px 1px rgba(0, 0, 0, 0.06),
+    0px 4px 2px rgba(0, 0, 0, 0.09), 0px 8px 4px rgba(0, 0, 0, 0.09),
+    0px 16px 8px rgba(0, 0, 0, 0.09);
+}
+
+.title {
+  font-size: 35px;
+  letter-spacing: 1px;
+  color: #3d3b40;
+}
+
+.description-container {
+  background-color: #3d3b40;
+  color: white;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0px -23px 25px 0px rgba(0, 0, 0, 0.17) inset,
+    0px -36px 30px 0px rgba(0, 0, 0, 0.15) inset,
+    0px -79px 40px 0px rgba(0, 0, 0, 0.1) inset, 0px 2px 1px rgba(0, 0, 0, 0.06),
+    0px 4px 2px rgba(0, 0, 0, 0.09), 0px 8px 4px rgba(0, 0, 0, 0.09),
+    0px 16px 8px rgba(0, 0, 0, 0.09);
+}
+
+.description {
+  width: 660px;
+  letter-spacing: 1px;
+}
