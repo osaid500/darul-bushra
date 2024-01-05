@@ -59,15 +59,13 @@ function populate(books) {
 
     gridItem.appendChild(titleContainer);
 
-    // bookElement.href = `chapterContainer.html?kitabSlug=${book.bookSlug}&bookId=${book.chapterNumber}`;
-
     bookContainer.appendChild(gridItem);
   });
 }
 
 function redirectToBookPage(e) {
   const closest = e.target.closest(".book-grid-item");
-  if (!closest.classList.contains("book-grid-item")) return;
+  if (!closest) return;
   const bookNumber = Number(closest.querySelector(".book-number").textContent);
   window.location.href = `/pages/chapterContainer.html?kitabSlug=${kitabSlug}&bookId=${bookNumber}`;
 }

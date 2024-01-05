@@ -1,5 +1,6 @@
-// const container = document.querySelector(".container");
-const kutubContainer = document.querySelector(".kutub-container");
+const kutubContainer = document.querySelector(".kutub-grid-container");
+
+let kutub = [];
 
 async function fetchKutub() {
   try {
@@ -10,7 +11,8 @@ async function fetchKutub() {
     }
 
     const data = await response.json();
-    populate(data.data.books);
+    kutub = data.data.books;
+    populate(kutub);
   } catch (error) {
     console.log("error: ", error);
   }
@@ -20,19 +22,43 @@ function populate(kutub) {
   //map over the kutub/books of hadith
   kutub.map((kitab) => {
     //create the list item
-    const listItem = document.createElement("li");
-    listItem.classList.add("kitab-container");
+    const gridItem = document.createElement("article");
+    gridItem.classList.add("kutub-grid-item");
 
-    //the a tag which holds book name
-    const kitabElement = document.createElement("a");
-    kitabElement.classList.add("kitab");
-    kitabElement.href = `pages/bookContainer.html?kitabSlug=${kitab.bookSlug}`;
-    kitabElement.textContent = kitab.bookName;
-    listItem.appendChild(kitabElement);
+    //kitab title
+    const kitabTitle = document.createElement("h2");
+    kitabTitle.classList.add("kutub-title");
+    kitabTitle.textContent = kitab.bookName;
+    gridItem.appendChild(kitabTitle);
+
+    //handle info section
+    const infoGrid = document.createElement("section");
+    infoGrid.innerHTML = `<section class="kutub-info-grid">
+      <span>Writer's name:</span>
+      <strong>${kitab.writerName}</strong>
+      <span>Book count:</span>
+      <strong>${kitab.chapters_count}</strong>
+      <span>Hadith count:</span>
+      <strong>${kitab.hadiths_count}</strong>
+    </section>`;
+
+    gridItem.appendChild(infoGrid);
 
     //render it
-    kutubContainer.appendChild(listItem);
+    kutubContainer.appendChild(gridItem);
   });
 }
 
+function handleRedirection(e) {
+  const closest = e.target.closest(".kutub-grid-item");
+  if (!closest) return;
+  const selectedKitabName = closest.querySelector(".kutub-title").textContent;
+  const selectedKitabIndex = kutub.findIndex(
+    (kitab) => kitab.bookName === selectedKitabName
+  );
+  const selectedKitabSlug = kutub[selectedKitabIndex].bookSlug;
+  window.location.href = `/pages/bookContainer.html?kitabSlug=${selectedKitabSlug}`;
+}
+
 document.addEventListener("DOMContentLoaded", fetchKutub);
+kutubContainer.addEventListener("click", handleRedirection);

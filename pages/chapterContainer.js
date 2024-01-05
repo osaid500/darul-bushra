@@ -119,7 +119,6 @@ function populate(ahadith) {
     hadithBodyContainer.appendChild(hadithTextContainer);
 
     //put the hadith header and body together
-    // hadithWholeContainer.appendChild(hadithHeadContainer);
     hadithWholeContainer.appendChild(hadithBodyContainer);
 
     // check if the chapter info isn't there
