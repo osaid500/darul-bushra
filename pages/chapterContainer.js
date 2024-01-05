@@ -26,6 +26,15 @@ async function fetchAhadith() {
   }
 }
 
+function checkThenFixText(text) {
+  if (text.includes("صلی ‌اللہ ‌علیہ ‌وسلم")) {
+    return text.replace(
+      /صلی\s*[\u200C\u200B]*اللہ\s*[\u200C\u200B]*علیہ\s*[\u200C\u200B]*وسلم/g,
+      " صلى الله عليه وسلم "
+    );
+  }
+}
+
 function populate(ahadith) {
   let lastChapter;
 
@@ -35,6 +44,8 @@ function populate(ahadith) {
     const bookNumber = Number(hadith.chapter.chapterNumber);
     const hadithNumber = hadith.hadithNumber;
     let hadithEnglishText = hadith.hadithEnglish;
+    // duplicate hadith
+    let isIndication;
 
     const hadithWholeContainer = document.createElement("article");
     hadithWholeContainer.classList.add("whole-hadith-container");
@@ -75,22 +86,37 @@ function populate(ahadith) {
     const englishSection = document.createElement("section");
     englishSection.classList.add("english-container");
 
+    let futureNarratorTitle;
+
     //hadith title
     const hadithTitle = document.createElement("h3");
     hadithTitle.classList.add("hadith-narrator");
     if (hadith.englishNarrator) {
-      hadithTitle.textContent = hadith.englishNarrator;
+      futureNarratorTitle = hadith.englishNarrator;
     } else if (hadith.hadithEnglish) {
-      let narratorIndex = hadith.hadithEnglish.indexOf(":");
-      hadithEnglishText = hadith.hadithEnglish.slice(narratorIndex + 1);
-      hadithTitle.textContent = hadith.hadithEnglish.slice(
-        0,
-        narratorIndex + 1
-      );
+      let narratorIndex;
+      narratorIndex = hadith.hadithEnglish.includes(":")
+        ? hadith.hadithEnglish.indexOf(":")
+        : hadith.hadithEnglish.includes("that") &&
+          hadith.hadithEnglish.indexOf("that") + 3;
+      if (narratorIndex) {
+        hadithEnglishText = hadith.hadithEnglish.slice(narratorIndex + 1);
+        futureNarratorTitle = hadith.hadithEnglish.slice(0, narratorIndex + 1);
+      } else {
+        isIndication = true;
+      }
     } else {
       hadithEnglishText = hadith.hadithUrdu;
     }
 
+    if (futureNarratorTitle) {
+      let fixedText = checkThenFixText(futureNarratorTitle);
+      if (fixedText) futureNarratorTitle = fixedText;
+    }
+
+    console.log(futureNarratorTitle);
+
+    hadithTitle.textContent = futureNarratorTitle;
     englishSection.appendChild(hadithTitle);
 
     //hadith text
@@ -98,6 +124,12 @@ function populate(ahadith) {
     hadithText.classList.add(
       hadith.hadithEnglish ? "hadith-text" : "urdu-text"
     );
+    if (isIndication) {
+      hadithText.classList.add("indication-text");
+    } else {
+      let fixedText = checkThenFixText(hadithEnglishText);
+      if (fixedText) hadithEnglishText = fixedText;
+    }
     hadithText.textContent = hadithEnglishText;
     englishSection.appendChild(hadithText);
 
