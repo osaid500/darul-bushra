@@ -2,6 +2,8 @@ const kutubContainer = document.querySelector(".kutub-grid-container");
 
 let kutub = [];
 
+const maxKutub = 7;
+
 async function fetchKutub() {
   try {
     const response = await fetch("/.netlify/functions/fetch-resource/books");
@@ -20,7 +22,7 @@ async function fetchKutub() {
 
 function populate(kutub) {
   //map over the kutub/books of hadith
-  kutub.map((kitab) => {
+  kutub.slice(0, maxKutub).map((kitab) => {
     //create the list item
     const gridItem = document.createElement("article");
     gridItem.classList.add("kutub-grid-item");

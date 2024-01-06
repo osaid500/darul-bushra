@@ -30,7 +30,7 @@ function checkThenFixText(text) {
   if (text.includes("صلی ‌اللہ ‌علیہ ‌وسلم")) {
     return text.replace(
       /صلی\s*[\u200C\u200B]*اللہ\s*[\u200C\u200B]*علیہ\s*[\u200C\u200B]*وسلم/g,
-      " صلى الله عليه وسلم "
+      "صلى الله عليه وسلم"
     );
   }
 }
