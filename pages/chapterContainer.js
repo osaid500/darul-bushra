@@ -1,14 +1,52 @@
 const container = document.querySelector(".container");
 
-async function fetchAhadith() {
-  //handle the params
-  const urlParams = new URLSearchParams(window.location.search);
-  const kitabSlug = urlParams.get("kitabSlug") || "sahih-bukhari";
-  const bookId = urlParams.get("bookId");
+//handle the params
+const urlParams = new URLSearchParams(window.location.search);
+const kitabSlug = urlParams.get("kitabSlug") || "sahih-bukhari";
+const bookId = urlParams.get("bookId");
 
+let prevMaxHadith, maximumHadith;
+//fetch 1000 ahadith
+prevMaxHadith = maximumHadith = "1000";
+
+// if it's sahih-muslim(has book 0 - introduction), fetching 1000 ahadith intially
+// causes the ahadith of other books(chapters) of sahih muslim to also be shown,
+// so only fetch 93 intially at book 0, then 93 previous ones at book 1.
+// tldr: only ever fetch 93 ahadith for chapter 0 of sahih muslim
+if (kitabSlug === "sahih-muslim" && Number(bookId) < 1) {
+  maximumHadith = "93";
+} else if (kitabSlug === "sahih-muslim" && Number(bookId) < 2) {
+  prevMaxHadith = "93";
+}
+
+let previousLastNumber;
+
+async function fetchAhadith() {
+  let firstBookNumber = kitabSlug === "sahih-muslim" ? "0" : "1";
   try {
+    // if it's not the first book
+    if (bookId !== firstBookNumber) {
+      const response = await fetch(
+        `/.netlify/functions/fetch-resource/hadiths?apiKey=insertapi&book=${kitabSlug}&chapter=${
+          Number(bookId) - 1
+        }&paginate=${prevMaxHadith}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+
+      previousLastNumber = Number(
+        data.data.hadiths.data[data.data.hadiths.data.length - 1].hadithNumber
+      );
+    } else {
+      previousLastNumber = 0;
+    }
+
     const response = await fetch(
-      `/.netlify/functions/fetch-resource/hadiths?apiKey=insertapi&book=${kitabSlug}&chapter=${bookId}&paginate=1000`
+      `/.netlify/functions/fetch-resource/hadiths?apiKey=insertapi&book=${kitabSlug}&chapter=${bookId}&paginate=${maximumHadith}`
     );
 
     if (!response.ok) {
@@ -22,7 +60,7 @@ async function fetchAhadith() {
     alert(
       "There was a problem finding the ahadith. Redirecting you to the landing page."
     );
-    window.location.href = "/";
+    // window.location.href = "/";
   }
 }
 
@@ -43,6 +81,8 @@ function populate(ahadith) {
     const kitabName = hadith.book.bookName;
     const bookNumber = Number(hadith.chapter.chapterNumber);
     const hadithNumber = hadith.hadithNumber;
+
+    const hadithNumberInBook = Number(hadithNumber) - previousLastNumber;
     let hadithEnglishText = hadith.hadithEnglish;
     // duplicate hadith
     let isIndication;
@@ -113,8 +153,6 @@ function populate(ahadith) {
       let fixedText = checkThenFixText(futureNarratorTitle);
       if (fixedText) futureNarratorTitle = fixedText;
     }
-
-    console.log(futureNarratorTitle);
 
     hadithTitle.textContent = futureNarratorTitle;
     englishSection.appendChild(hadithTitle);
@@ -198,7 +236,7 @@ function populate(ahadith) {
                 </tr>
                 <tr>
                   <td>In-book reference</td>
-                  <td>: Book ${bookNumber}, Hadith ${hadithNumber}</td>
+                  <td>: Book ${bookNumber}, Hadith ${hadithNumberInBook}</td>
                 </tr>
               </tbody>
             </table>`;
