@@ -4,53 +4,17 @@ const container = document.querySelector(".container");
 const urlParams = new URLSearchParams(window.location.search);
 const kitabSlug = urlParams.get("kitabSlug") || "sahih-bukhari";
 const bookId = urlParams.get("bookId");
-
-let prevMaxHadith, maximumHadith;
-//fetch 1000 ahadith
-prevMaxHadith = maximumHadith = "1000";
-
-// if it's sahih-muslim(has book 0 - introduction), fetching 1000 ahadith intially
-// causes the ahadith of other books(chapters) of sahih muslim to also be shown,
-// so only fetch 93 intially at book 0, then 93 previous ones at book 1.
-// tldr: only ever fetch 93 ahadith for chapter 0 of sahih muslim
-if (kitabSlug === "sahih-muslim" && Number(bookId) < 1) {
-  maximumHadith = "93";
-} else if (kitabSlug === "sahih-muslim" && Number(bookId) < 2) {
-  prevMaxHadith = "93";
-}
-
-let previousLastNumber;
+const maximumHadithToFetch = 1000;
+let ahadith = [];
 
 async function fetchAhadith() {
   const loading = document.createElement("h1");
   loading.textContent = "Loading...";
   loading.classList.add("loading-text");
   container.appendChild(loading);
-  let firstBookNumber = kitabSlug === "sahih-muslim" ? "0" : "1";
   try {
-    // if it's not the first book
-    if (bookId !== firstBookNumber) {
-      const response = await fetch(
-        `/.netlify/functions/fetch-resource/hadiths?apiKey=insertapi&book=${kitabSlug}&chapter=${
-          Number(bookId) - 1
-        }&paginate=${prevMaxHadith}`
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-
-      previousLastNumber = Number(
-        data.data.hadiths.data[data.data.hadiths.data.length - 1].hadithNumber
-      );
-    } else {
-      previousLastNumber = 0;
-    }
-
     const response = await fetch(
-      `/.netlify/functions/fetch-resource/hadiths?apiKey=insertapi&book=${kitabSlug}&chapter=${bookId}&paginate=${maximumHadith}`
+      `/.netlify/functions/fetch-resource/hadiths?apiKey=insertapi&book=${kitabSlug}&chapter=${bookId}&paginate=${maximumHadithToFetch}`
     );
 
     if (!response.ok) {
@@ -58,7 +22,9 @@ async function fetchAhadith() {
     }
 
     const data = await response.json();
-    populate(data.data.hadiths.data);
+    console.log(data, response);
+    ahadith = data.data.hadiths.data;
+    populate(ahadith);
   } catch (error) {
     console.log("error: ", error);
     alert(
@@ -78,15 +44,20 @@ function checkThenFixText(text) {
 }
 
 function populate(ahadith) {
+  console.log(ahadith);
   let lastChapter;
 
   // handle the ahadith
-  ahadith.map((hadith) => {
+  ahadith.map((hadith, index) => {
     const kitabName = hadith.book.bookName;
     const bookNumber = Number(hadith.chapter.chapterNumber);
     const hadithNumber = hadith.hadithNumber;
 
-    const hadithNumberInBook = Number(hadithNumber) - previousLastNumber;
+    if (index > 0) {
+      if (Number(hadithNumber) - ahadith[index - 1].hadithNumber !== 1) return;
+    }
+
+    const hadithNumberInBook = bookId === "0" ? index : index + 1;
     let hadithEnglishText = hadith.hadithEnglish;
     // duplicate hadith
     let isIndication;
