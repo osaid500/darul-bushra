@@ -7,6 +7,10 @@ const urlParams = new URLSearchParams(window.location.search);
 const kitabSlug = urlParams.get("kitabSlug") || "sahih-bukhari";
 
 async function fetchBooks() {
+  const loading = document.createElement("h1");
+  loading.textContent = "Loading...";
+  loading.classList.add("loading-text");
+  bookContainer.appendChild(loading);
   try {
     const response = await fetch(
       `/.netlify/functions/fetch-resource/${kitabSlug}/chapters`
@@ -61,6 +65,7 @@ function populate(books) {
 
     bookContainer.appendChild(gridItem);
   });
+  bookContainer.removeChild(bookContainer.querySelector(".loading-text"));
 }
 
 function redirectToBookPage(e) {

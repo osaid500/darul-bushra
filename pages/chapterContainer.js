@@ -22,6 +22,10 @@ if (kitabSlug === "sahih-muslim" && Number(bookId) < 1) {
 let previousLastNumber;
 
 async function fetchAhadith() {
+  const loading = document.createElement("h1");
+  loading.textContent = "Loading...";
+  loading.classList.add("loading-text");
+  container.appendChild(loading);
   let firstBookNumber = kitabSlug === "sahih-muslim" ? "0" : "1";
   try {
     // if it's not the first book
@@ -249,6 +253,7 @@ function populate(ahadith) {
     hadithWholeContainer.appendChild(hadithBodyContainer);
     container.appendChild(hadithWholeContainer);
   });
+  container.removeChild(container.querySelector(".loading-text"));
 }
 
 document.addEventListener("DOMContentLoaded", fetchAhadith);

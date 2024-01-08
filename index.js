@@ -5,6 +5,11 @@ let kutub = [];
 const maxKutub = 7;
 
 async function fetchKutub() {
+  const loading = document.createElement("h1");
+  loading.textContent = "Loading...";
+  loading.classList.add("loading-text");
+  kutubContainer.appendChild(loading);
+
   try {
     const response = await fetch("/.netlify/functions/fetch-resource/books");
 
@@ -49,6 +54,7 @@ function populate(kutub) {
     //render it
     kutubContainer.appendChild(gridItem);
   });
+  kutubContainer.removeChild(kutubContainer.querySelector(".loading-text"));
 }
 
 function handleRedirection(e) {
