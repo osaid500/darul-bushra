@@ -35,7 +35,10 @@ async function fetchAhadith() {
 }
 
 function checkThenFixText(text) {
-  if (text.includes("صلی ‌اللہ ‌علیہ ‌وسلم")) {
+  if (text.includes("رضی اللہ عنہ")) {
+    console.log("test");
+    return text.replace(/رضی اللہ عنہ/g, "رضي الله عنه");
+  } else if (text.includes("صلی ‌اللہ ‌علیہ ‌وسلم")) {
     return text.replace(
       /صلی\s*[\u200C\u200B]*اللہ\s*[\u200C\u200B]*علیہ\s*[\u200C\u200B]*وسلم/g,
       "صلى الله عليه وسلم"
