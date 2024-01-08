@@ -77,6 +77,7 @@
   display: flex;
   justify-content: space-between;
   text-align: justify;
+  margin-bottom: 16px;
 }
 
 .hadith-narrator {
@@ -134,3 +135,30 @@
 }
 
 /* CONTAINER END!!! */
+
+@media only screen and (max-width: 500px) {
+  .book-container {
+    flex-direction: column;
+  }
+
+  .chapter-description-container {
+    flex-direction: column;
+  }
+
+  .hadith-text-container {
+    flex-direction: column;
+  }
+
+  .hadith-text-container section {
+    width: 100%;
+  }
+
+  .hadith-number {
+    font-size: smaller;
+  }
+
+  .table-reference {
+    width: 100%;
+    font-size: 9px;
+  }
+}

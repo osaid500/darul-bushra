@@ -13,7 +13,6 @@ p {
 
 .title-container {
   background-color: #92c7cf;
-  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,12 +27,12 @@ p {
   font-size: 35px;
   letter-spacing: 1px;
   color: #3d3b40;
+  text-align: center;
 }
 
 .description-container {
   background-color: #3d3b40;
   color: white;
-  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,4 +49,30 @@ p {
 .description {
   width: 660px;
   letter-spacing: 1px;
+}
+
+.title-container,
+.description-container {
+  height: 50%;
+}
+
+@media only screen and (max-width: 300px) {
+  .description {
+    font-size: xx-small;
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 400px) {
+  .description {
+    font-size: x-small;
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 670px) {
+  .description {
+    font-size: smaller;
+    width: 90%;
+  }
 }

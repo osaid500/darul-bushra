@@ -130,34 +130,32 @@ nav {
   gap: 10px;
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 440px) {
   .kutub-grid-container {
-    display: grid;
     grid-template-columns: auto;
-    gap: 40px;
+  }
+
+  .header-text {
+    font-size: 1em;
   }
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 440px) {
   .kutub-grid-container {
-    display: grid;
     grid-template-columns: auto auto;
-    gap: 40px;
+  }
+
+  .header-text {
+    font-size: 1.5em;
   }
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 750px) {
   .kutub-grid-container {
-    display: grid;
     grid-template-columns: auto auto auto;
-    gap: 40px;
   }
-}
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  ...;
+  .header-text {
+    font-size: 2em;
+  }
 }
