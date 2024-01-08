@@ -22,7 +22,6 @@ async function fetchAhadith() {
     }
 
     const data = await response.json();
-    console.log(data, response);
     ahadith = data.data.hadiths.data;
     populate(ahadith);
   } catch (error) {
@@ -30,13 +29,12 @@ async function fetchAhadith() {
     alert(
       "There was a problem finding the ahadith. Redirecting you to the landing page."
     );
-    // window.location.href = "/";
+    window.location.href = "/";
   }
 }
 
 function checkThenFixText(text) {
   if (text.includes("رضی اللہ عنہ")) {
-    console.log("test");
     return text.replace(/رضی اللہ عنہ/g, "رضي الله عنه");
   } else if (text.includes("صلی ‌اللہ ‌علیہ ‌وسلم")) {
     return text.replace(
@@ -47,7 +45,6 @@ function checkThenFixText(text) {
 }
 
 function populate(ahadith) {
-  console.log(ahadith);
   let lastChapter;
 
   // handle the ahadith

@@ -1,4 +1,3 @@
-// const container = document.querySelector(".container");
 const bookContainer = document.querySelector(".book-grid-container");
 
 let books = [];
