@@ -54,7 +54,13 @@ function populate(ahadith) {
     const hadithNumber = hadith.hadithNumber;
 
     if (index > 0) {
-      if (Number(hadithNumber) - ahadith[index - 1].hadithNumber !== 1) return;
+      if (
+        Number(hadithNumber.split(", ")[0]) -
+          Number(ahadith[index - 1].hadithNumber.split(", ").slice(-1)) !==
+        1
+      ) {
+        return;
+      }
     }
 
     const hadithNumberInBook = bookId === "0" ? index : index + 1;
